@@ -1,0 +1,71 @@
+参考网址：
+http://jingyan.baidu.com/article/f7ff0bfc7181492e27bb1360.html
+http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000
+github网址：
+https://github.com/czduanqi2009/c-study
+用户名：czduanqi2009
+czduanqi2008
+
+1. 在github站点注册一个账号 
+2. 下载一个msysgit git客户端
+3.  创建版本库：
+mkdir -p /c/Users/All Users/learn
+cd  /c/Users/All Users/learn
+4. 通过git init命令把这个目录变成Git可以管理的仓库：git init
+5. 你下载Notepad++代替记事本，不但功能强大，而且免费！记得把Notepad++的默认编码设置为UTF-8 without BOM即可.用notepad创建一个文本文件readme.txt
+6. 用git add把文件readme.txt添加到仓库
+git add readme.txt
+7. 提交文件到仓库：
+git commit -m "add readme.txt"
+8. 利用1中注册的账号登陆github平台，并作如下设置:
+[由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的]
+ssh-keygen -t rsa -C "czduanqi2008@126.com"
+一路回车。之后到主目录下会看到隐藏目录：.ssh.里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
+9.登陆github后，	点击Settings ---SSH keys 点击Add SSH key按钮后，复制文件：id_rsa.pub的内容到文本框：Key中后，点击Add key按钮即可。
+10.
+添加远程库：
+登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：
+下面命令：本地库与远程库关联起来。	
+git remote add origin git@github.com:czduanqi2009/learngit.git
+11.把本地库的内容推送到远程库上。
+git push -u origin master
+12.刷新github页面后，发现远程和本地的数据一样。
+
+11.常见错误
+如果输入$ git remote add origin git@github.com:djqiang（github帐号名）/gitdemo（项目名）.git 
+    提示出错信息：fatal: remote origin already exists.
+    解决办法如下：
+    1、先输入$ git remote rm origin
+    2、再输入$ git remote add origin git@github.com:djqiang/gitdemo.git 就不会报错了！
+    3、如果输入$ git remote rm origin 还是报错的话，error: Could not remove config section 'remote.origin'. 我们需要修改gitconfig文件的内容
+    4、找到你的github的安装路径，我的是C:\Users\ASUS\AppData\Local\GitHub\PortableGit_ca477551eeb4aea0e4ae9fcd3358bd96720bb5c8\etc
+    5、找到一个名为gitconfig的文件，打开它把里面的[remote "origin"]那一行删掉就好了！
+ 
+ 
+    如果输入$ ssh -T git@github.com
+    出现错误提示：Permission denied (publickey).因为新生成的key不能加入ssh就会导致连接不上github。
+    解决办法如下：
+    1、先输入$ ssh-agent，再输入$ ssh-add ~/.ssh/id_key，这样就可以了。
+    2、如果还是不行的话，输入ssh-add ~/.ssh/id_key 命令后出现报错Could not open a connection to your authentication agent.解决方法是key用Git Gui的ssh工具生成，这样生成的时候key就直接保存在ssh中了，不需要再ssh-add命令加入了，其它的user，token等配置都用命令行来做。
+    3、最好检查一下在你复制id_rsa.pub文件的内容时有没有产生多余的空格或空行，有些编辑器会帮你添加这些的。
+ 
+ 
+    如果输入$ git push origin master
+    提示出错信息：error:failed to push som refs to .......
+    解决办法如下：
+    1、先输入$ git pull origin master //先把远程服务器github上面的文件拉下来
+    2、再输入$ git push origin master
+    3、如果出现报错 fatal: Couldn't find remote ref master或者fatal: 'origin' does not appear to be a git repository以及fatal: Could not read from remote repository.
+    4、则需要重新输入$ git remote add origingit@github.com:djqiang/gitdemo.git
+ 
+ 
+    使用git在本地创建一个项目的过程
+    $ makdir ~/hello-world    //创建一个项目hello-world
+    $ cd ~/hello-world       //打开这个项目
+    $ git init             //初始化 
+    $ touch README
+    $ git add README        //更新README文件
+    $ git commit -m 'first commit'     //提交更新，并注释信息“first commit”
+    $ git remote add origin git@github.com:defnngj/hello-world.git     //连接远程github项目  
+    $ git push -u origin master     //将本地项目更新到github项目上去
+ 
